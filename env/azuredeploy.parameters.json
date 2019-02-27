@@ -54,10 +54,10 @@
       "value": "azmrmubiwordpresspoc99"
     },
     "hostingPlanName": {
-      "value": null
+      "value": "azmrmubiwordpresspoc-asp"
     },
     "hostingEnvironment": {
-      "value": "azmrmubiwordpresspoc-asp"
+      "value": ""
     },
     "location": {
       "value": "West Europe"
