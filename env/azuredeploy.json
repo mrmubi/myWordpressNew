@@ -1,224 +1,233 @@
 {
-    "parameters": {
-        "databaseName": {
-            "type": "string"
-        },
-        "administratorLogin": {
-            "type": "string"
-        },
-      "administratorLoginPassword": {
-        "type": "securestring"
-      },
-        "mysqLocation": {
-            "type": "string"
-        },
-        "serverName": {
-            "type": "string"
-        },
-        "skuCapacity": {
-            "type": "int"
-        },
-        "skuFamily": {
-            "type": "string"
-        },
-        "storageMB": {
-            "type": "int"
-        },
-        "backupRetentionDays": {
-            "type": "int"
-        },
-        "geoRedundantBackup": {
-            "type": "string"
-        },
-        "skuName": {
-            "type": "string"
-        },
-        "skuSizeMB": {
-            "type": "int"
-        },
-        "skuTier": {
-            "type": "string"
-        },
-        "version": {
-            "type": "string"
-        },
-        "charset": {
-            "type": "string"
-        },
-        "collation": {
-            "type": "string"
-        },
-        "name": {
-            "type": "string"
-        },
-        "hostingPlanName": {
-            "type": "string"
-        },
-        "hostingEnvironment": {
-            "type": "string"
-        },
-        "location": {
-            "type": "string"
-        },
-        "sku": {
-            "type": "string"
-        },
-        "skuCode": {
-            "type": "string"
-        },
-        "workerSize": {
-            "type": "string"
-        },
-        "serverFarmResourceGroup": {
-            "type": "string"
-        },
-        "subscriptionId": {
-            "type": "string"
-        }
+
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+
+  "parameters": {
+    "databaseName": {
+      "type": "string",
+      "defaultValue": "azmrmubimysqldatabase99"
     },
-    "resources": [
-        {
-            "name": "[parameters('name')]",
-            "type": "Microsoft.Web/sites",
-            "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "microsoft.insights/components/azmrmubiwordpresspoc"
-            ],
-            "properties": {
-                "siteConfig": {
-                    "connectionStrings": [
-                        {
-                            "name": "defaultConnection",
-                            "ConnectionString": "[concat('Database=', parameters('databaseName'), ';Data Source=', parameters('serverName') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('serverName') ,';Password=',parameters('administratorLoginPassword'))]",
-                            "type": "MySQL"
-                        }
-                    ],
-                    "appSettings": [
-                        {
-                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
-                            "value": "true"
-                        },
-                       
-                        {
-                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference('microsoft.insights/components/azmrmubiwordpresspoc', '2015-05-01').InstrumentationKey]"
-                        },
-                        {
-                            "name": "XDT_MicrosoftApplicationInsights_Mode",
-                            "value": "default"
-                        },
-                        {
-                            "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
-                            "value": "~2"
-                        },
-                        {
-                            "name": "DATABASE_HOST",
-                            "value": "[concat(parameters('serverName') ,'.mysql.database.azure.com')]"
-                        },
-                        {
-                            "name": "DATABASE_NAME",
-                            "value": "[parameters('databaseName')]"
-                        },
-                        {
-                            "name": "DATABASE_PASSWORD",
-                            "value": "[parameters('administratorLoginPassword')]"
-                        },
-                        {
-                            "name": "DATABASE_USERNAME",
-                            "value": "[concat(parameters('administratorLogin'),'@',parameters('serverName'))]"
-                        }
-                    ],
-                    "appCommandLine": "",
-                    "linuxFxVersion": "DOCKER|appsvcorg/wordpress-alpine-php:0.61"
-                },
-                "name": "[parameters('name')]",
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "hostingEnvironment": "[parameters('hostingEnvironment')]"
-            },
-            "apiVersion": "2016-03-01",
-            "location": "[parameters('location')]"
-        },
-        {
-            "apiVersion": "2016-09-01",
-            "name": "[parameters('hostingPlanName')]",
-            "type": "Microsoft.Web/serverfarms",
-            "location": "[parameters('location')]",
-            "properties": {
-                "name": "[parameters('hostingPlanName')]",
-                "workerSizeId": "[parameters('workerSize')]",
-                "reserved": true,
-                "numberOfWorkers": "1",
-                "hostingEnvironment": "[parameters('hostingEnvironment')]"
-            },
-            "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
-            },
-            "kind": "linux"
-        },
-        {
-            "apiVersion": "2015-05-01",
-            "name": "azmrmubiwordpresspoc",
-            "type": "microsoft.insights/components",
-            "location": "West Europe",
-            "properties": {
-                "ApplicationId": "[parameters('name')]",
-                "Request_Source": "IbizaWebAppExtensionCreate"
+    "administratorLogin": {
+      "type": "string",
+      "defaultValue": "mrmubi99"
+    },
+    "administratorLoginPassword": {
+      "type": "securestring",
+      "defaultValue": "Microsoft1999"
+    },
+    "mysqLocation": {
+      "type": "string"
+    },
+    "serverName": {
+      "type": "string",
+      "defaultValue": "azmrmubimysqlserver99"
+    },
+    "skuCapacity": {
+      "type": "int"
+    },
+    "skuFamily": {
+      "type": "string"
+    },
+    "storageMB": {
+      "type": "int"
+    },
+    "backupRetentionDays": {
+      "type": "int"
+    },
+    "geoRedundantBackup": {
+      "type": "string"
+    },
+    "skuName": {
+      "type": "string"
+    },
+    "skuSizeMB": {
+      "type": "int"
+    },
+    "skuTier": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "charset": {
+      "type": "string"
+    },
+    "collation": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "hostingPlanName": {
+      "type": "string"
+    },
+    "hostingEnvironment": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "skuCode": {
+      "type": "string"
+    },
+    "workerSize": {
+      "type": "string"
+    },
+    "serverFarmResourceGroup": {
+      "type": "string",
+      "defaultValue": "azmrmubiwordpresspoc-rg-99"
+    },
+    "subscriptionId": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Web/sites",
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "microsoft.insights/components/azmrmubiwordpresspoc"
+      ],
+      "properties": {
+        "siteConfig": {
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "ConnectionString": "[concat('Database=', parameters('databaseName'), ';Data Source=', parameters('serverName') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('serverName') ,';Password=',parameters('administratorLoginPassword'))]",
+              "type": "MySQL"
             }
+          ],
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference('microsoft.insights/components/azmrmubiwordpresspoc', '2015-05-01').InstrumentationKey]"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "default"
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "~2"
+            },
+            {
+              "name": "DATABASE_HOST",
+              "value": "[concat(parameters('serverName') ,'.mysql.database.azure.com')]"
+            },
+            {
+              "name": "DATABASE_NAME",
+              "value": "[parameters('databaseName')]"
+            },
+            {
+              "name": "DATABASE_PASSWORD",
+              "value": "[parameters('administratorLoginPassword')]"
+            },
+            {
+              "name": "DATABASE_USERNAME",
+              "value": "[concat(parameters('administratorLogin'),'@',parameters('serverName'))]"
+            }
+          ],
+          "appCommandLine": "",
+          "linuxFxVersion": "DOCKER|appsvcorg/wordpress-alpine-php:0.61"
+        },
+        "name": "[parameters('name')]",
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "hostingEnvironment": "[parameters('hostingEnvironment')]"
+      },
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('location')]"
+    },
+    {
+      "apiVersion": "2016-09-01",
+      "name": "[parameters('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[parameters('location')]",
+      "properties": {
+        "name": "[parameters('hostingPlanName')]",
+        "workerSizeId": "[parameters('workerSize')]",
+        "reserved": true,
+        "numberOfWorkers": "1",
+        "hostingEnvironment": "[parameters('hostingEnvironment')]"
+      },
+      "sku": {
+        "Tier": "[parameters('sku')]",
+        "Name": "[parameters('skuCode')]"
+      },
+      "kind": "linux"
+    },
+    {
+      "apiVersion": "2015-05-01",
+      "name": "azmrmubiwordpresspoc",
+      "type": "microsoft.insights/components",
+      "location": "West Europe",
+      "properties": {
+        "ApplicationId": "[parameters('name')]",
+        "Request_Source": "IbizaWebAppExtensionCreate"
+      }
+    },
+    {
+      "name": "[parameters('serverName')]",
+      "type": "Microsoft.DBforMySQL/servers",
+      "apiVersion": "2017-12-01-preview",
+      "location": "[parameters('mysqLocation')]",
+      "properties": {
+        "version": "[parameters('version')]",
+        "administratorLogin": "[parameters('administratorLogin')]",
+        "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
+        "storageProfile": {
+          "storageMB": "[parameters('skuSizeMB')]",
+          "backupRetentionDays": "[parameters('backupRetentionDays')]",
+          "geoRedundantBackup": "[parameters('geoRedundantBackup')]"
+        },
+        "sslEnforcement": "Disabled"
+      },
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "tier": "[parameters('skuTier')]",
+        "capacity": "[parameters('skuCapacity')]",
+        "size": "[parameters('skuSizeMB')]",
+        "family": "[parameters('skuFamily')]"
+      },
+      "resources": [
+        {
+          "name": "AllowAll",
+          "type": "firewallrules",
+          "apiVersion": "2017-12-01-preview",
+          "properties": {
+            "startIpAddress": "0.0.0.0",
+            "endIpAddress": "255.255.255.255"
+          },
+          "location": "[parameters('mysqLocation')]",
+          "dependsOn": [
+            "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'), '/databases/' , parameters('databaseName'))]",
+            "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
+          ]
         },
         {
-            "name": "[parameters('serverName')]",
-            "type": "Microsoft.DBforMySQL/servers",
-            "apiVersion": "2017-12-01-preview",
-            "location": "[parameters('mysqLocation')]",
-            "properties": {
-                "version": "[parameters('version')]",
-                "administratorLogin": "[parameters('administratorLogin')]",
-                "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
-                "storageProfile": {
-                    "storageMB": "[parameters('skuSizeMB')]",
-                    "backupRetentionDays": "[parameters('backupRetentionDays')]",
-                    "geoRedundantBackup": "[parameters('geoRedundantBackup')]"
-                },
-                "sslEnforcement": "Disabled"
-            },
-            "sku": {
-                "name": "[parameters('skuName')]",
-                "tier": "[parameters('skuTier')]",
-                "capacity": "[parameters('skuCapacity')]",
-                "size": "[parameters('skuSizeMB')]",
-                "family": "[parameters('skuFamily')]"
-            },
-            "resources": [
-                {
-                    "name": "AllowAll",
-                    "type": "firewallrules",
-                    "apiVersion": "2017-12-01-preview",
-                    "properties": {
-                        "startIpAddress": "0.0.0.0",
-                        "endIpAddress": "255.255.255.255"
-                    },
-                    "location": "[parameters('mysqLocation')]",
-                    "dependsOn": [
-                        "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'), '/databases/' , parameters('databaseName'))]",
-                        "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
-                    ]
-                },
-                {
-                    "name": "[parameters('databaseName')]",
-                    "type": "databases",
-                    "apiVersion": "2017-12-01-preview",
-                    "properties": {
-                        "charset": "[parameters('charset')]",
-                        "collation": "[parameters('collation')]"
-                    },
-                    "dependsOn": [
-                        "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
-                    ]
-                }
-            ]
+          "name": "[parameters('databaseName')]",
+          "type": "databases",
+          "apiVersion": "2017-12-01-preview",
+          "properties": {
+            "charset": "[parameters('charset')]",
+            "collation": "[parameters('collation')]"
+          },
+          "dependsOn": [
+            "[concat('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
+          ]
         }
-    ],
-    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0"
+      ]
+    }
+  ],
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0"
 }
