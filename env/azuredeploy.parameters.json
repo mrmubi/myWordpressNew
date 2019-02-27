@@ -6,16 +6,16 @@
       "value": "azmrmubimysqldatabase99"
     },
     "administratorLogin": {
-      "value": null
+      "value": "azmrmubiadminlogin99"
     },
     "administratorLoginPassword": {
-      "value": null
+      "value": "Microsoft1999"
     },
     "mysqLocation": {
       "value": "West Europe"
     },
     "serverName": {
-      "value": null
+      "value": "azmrmubimysqlserver99"
     },
     "skuCapacity": {
       "value": 4
@@ -51,7 +51,7 @@
       "value": "utf8"
     },
     "name": {
-      "value": null
+      "value": "azmrmubiwordpresspoc99"
     },
     "hostingPlanName": {
       "value": null
