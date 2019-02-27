@@ -6,9 +6,9 @@
         "administratorLogin": {
             "type": "string"
         },
-        "administratorLoginPassword": {
-            "type": "securestring"
-        },
+      "administratorLoginPassword": {
+        "type": "securestring"
+      },
         "mysqLocation": {
             "type": "string"
         },
@@ -98,14 +98,7 @@
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "true"
                         },
-                        {
-                            "name": "GIT_REPO",
-                            "value": "https://github.com/azureappserviceoss/wordpress-azure"
-                        },
-                        {
-                            "name": "GIT_BRANCH",
-                            "value": "linux-appservice"
-                        },
+                       
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
                             "value": "[reference('microsoft.insights/components/azmrmubiwordpresspoc', '2015-05-01').InstrumentationKey]"
