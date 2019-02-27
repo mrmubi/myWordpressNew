@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
   "parameters": {
     "databaseName": {
-      "value": null
+      "value": "azmrmubimysqldatabase99"
     },
     "administratorLogin": {
       "value": null
