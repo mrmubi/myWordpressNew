@@ -3,19 +3,19 @@
     "contentVersion": "1.0.0.0",
   "parameters": {
     "databaseName": {
-      "value": "mysqldatabasetest"
+      "value": null
     },
     "administratorLogin": {
-      "value": "mysqldbuser"
+      "value": null
     },
     "administratorLoginPassword": {
-      "value": "Kaka123Kaka123"
+      "value": null
     },
     "mysqLocation": {
       "value": "West Europe"
     },
     "serverName": {
-      "value": "azmrmubiwordpresspoc-mysqldbserver"
+      "value": null
     },
     "skuCapacity": {
       "value": 4
@@ -51,10 +51,10 @@
       "value": "utf8"
     },
     "name": {
-      "value": "azmrmubiwordpresspoc"
+      "value": null
     },
     "hostingPlanName": {
-      "value": "azmrmubiwordpresspoc-asp"
+      "value": null
     },
     "hostingEnvironment": {
       "value": ""
