@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseName": {
+            "value": "mysqldatabasetest"
+        },
+        "administratorLogin": {
+            "value": "mysqldbuser"
+        },
+        "administratorLoginPassword": {
+            "value": null
+        },
+        "mysqLocation": {
+            "value": "West Europe"
+        },
+        "serverName": {
+            "value": "azmrmubiwordpresspoc-mysqldbserver"
+        },
+        "skuCapacity": {
+            "value": 4
+        },
+        "skuFamily": {
+            "value": "Gen5"
+        },
+        "skuName": {
+            "value": "GP_Gen5_4"
+        },
+        "skuSizeMB": {
+            "value": 102400
+        },
+        "skuTier": {
+            "value": "GeneralPurpose"
+        },
+        "storageMB": {
+            "value": 102400
+        },
+        "backupRetentionDays": {
+            "value": 7
+        },
+        "geoRedundantBackup": {
+            "value": "Disabled"
+        },
+        "version": {
+            "value": "5.7"
+        },
+        "collation": {
+            "value": "utf8_general_ci"
+        },
+        "charset": {
+            "value": "utf8"
+        },
+        "name": {
+            "value": "azmrmubiwordpresspoc"
+        },
+        "hostingPlanName": {
+            "value": "azmrmubiwordpresspoc-asp"
+        },
+        "hostingEnvironment": {
+            "value": ""
+        },
+        "location": {
+            "value": "West Europe"
+        },
+        "sku": {
+            "value": "PremiumV2"
+        },
+        "workerSize": {
+            "value": "3"
+        },
+        "serverFarmResourceGroup": {
+            "value": "azmrmubiwordpresspoc-test-rg"
+        },
+        "skuCode": {
+            "value": "P1v2"
+        },
+        "subscriptionId": {
+            "value": "3184ff26-27cb-4e97-8a37-4cdefff251e7"
+        }
+    }
+}
