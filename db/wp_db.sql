@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mysqldatabase13259
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mysqldatabase13259` DEFAULT CHARACTER SET utf8 ;
-USE `mysqldatabase13259` ;
+--CREATE SCHEMA IF NOT EXISTS `mysqldatabase13259` DEFAULT CHARACTER SET utf8 ;
+--USE `mysqldatabase13259` ;
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_commentmeta`
+-- Table  `wp_commentmeta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_commentmeta` (
+CREATE TABLE IF NOT EXISTS  `wp_commentmeta` (
   `meta_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `comment_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `meta_key` VARCHAR(255) NULL DEFAULT NULL,
@@ -34,9 +34,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_comments`
+-- Table  `wp_comments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_comments` (
+CREATE TABLE IF NOT EXISTS  `wp_comments` (
   `comment_ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `comment_post_ID` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `comment_author` TINYTEXT NOT NULL,
@@ -65,9 +65,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_links`
+-- Table  `wp_links`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_links` (
+CREATE TABLE IF NOT EXISTS  `wp_links` (
   `link_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `link_url` VARCHAR(255) NOT NULL DEFAULT '',
   `link_name` VARCHAR(255) NOT NULL DEFAULT '',
@@ -89,9 +89,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_options`
+-- Table  `wp_options`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_options` (
+CREATE TABLE IF NOT EXISTS  `wp_options` (
   `option_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `option_name` VARCHAR(191) NOT NULL DEFAULT '',
   `option_value` LONGTEXT NOT NULL,
@@ -105,9 +105,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_postmeta`
+-- Table  `wp_postmeta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_postmeta` (
+CREATE TABLE IF NOT EXISTS  `wp_postmeta` (
   `meta_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `post_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `meta_key` VARCHAR(255) NULL DEFAULT NULL,
@@ -122,9 +122,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_posts`
+-- Table  `wp_posts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_posts` (
+CREATE TABLE IF NOT EXISTS  `wp_posts` (
   `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `post_author` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `post_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -160,9 +160,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_term_relationships`
+-- Table  `wp_term_relationships`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_term_relationships` (
+CREATE TABLE IF NOT EXISTS  `wp_term_relationships` (
   `object_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `term_taxonomy_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `term_order` INT(11) NOT NULL DEFAULT '0',
@@ -174,9 +174,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_term_taxonomy`
+-- Table  `wp_term_taxonomy`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_term_taxonomy` (
+CREATE TABLE IF NOT EXISTS  `wp_term_taxonomy` (
   `term_taxonomy_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `term_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `taxonomy` VARCHAR(32) NOT NULL DEFAULT '',
@@ -193,9 +193,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_termmeta`
+-- Table  `wp_termmeta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_termmeta` (
+CREATE TABLE IF NOT EXISTS  `wp_termmeta` (
   `meta_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `term_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `meta_key` VARCHAR(255) NULL DEFAULT NULL,
@@ -209,9 +209,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_terms`
+-- Table  `wp_terms`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_terms` (
+CREATE TABLE IF NOT EXISTS  `wp_terms` (
   `term_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL DEFAULT '',
   `slug` VARCHAR(200) NOT NULL DEFAULT '',
@@ -226,9 +226,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_usermeta`
+-- Table  `wp_usermeta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_usermeta` (
+CREATE TABLE IF NOT EXISTS  `wp_usermeta` (
   `umeta_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `meta_key` VARCHAR(255) NULL DEFAULT NULL,
@@ -243,9 +243,9 @@ COLLATE = utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
--- Table `mysqldatabase13259`.`wp_users`
+-- Table  `wp_users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mysqldatabase13259`.`wp_users` (
+CREATE TABLE IF NOT EXISTS  `wp_users` (
   `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_login` VARCHAR(60) NOT NULL DEFAULT '',
   `user_pass` VARCHAR(255) NOT NULL DEFAULT '',
