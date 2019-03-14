@@ -34,9 +34,6 @@
     },
     "databases_mysql_name": {
       "value": "mysqldb99"
-    },
-    "databases_mysqldatabasexxxx_name": {
-      "value": "myserverdatabse"
     }
   }
 }
