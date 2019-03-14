@@ -37,9 +37,6 @@
     },
     "databases_mysqldatabasexxxx_name": {
       "value": "myserverdatabse"
-    },
-    "hostNameBindings_app_xxxx_xxxx_xxxxx_prd.azurewebsites.net_name": {
-      "value": "www.mrmubi.com"
     }
   }
 }
