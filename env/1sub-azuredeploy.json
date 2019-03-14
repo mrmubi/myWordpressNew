@@ -20,9 +20,7 @@
       "defaultValue": "APP-xxxx-xxxx-xxxxx",
       "type": "String"
     },
-
-
-    "RGLocation": {
+    "myrglocation": {
       "defaultValue": "West Europe",
       "type": "String"
     },
@@ -105,7 +103,7 @@
       "kind": "app",
       "name": "[parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name')]",
       "apiVersion": "2016-09-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "name": "[parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name')]",
@@ -125,7 +123,7 @@
       "kind": "web",
       "name": "[parameters('components_AI_xxxx_xxxx_xxxx_name')]",
       "apiVersion": "2015-05-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "Application_Type": "web",
@@ -140,7 +138,7 @@
       "type": "microsoft.insights/alertrules",
       "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
       "apiVersion": "2014-04-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
      "scale": null,
       "properties": {
         "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
@@ -174,7 +172,7 @@
       "kind": "app",
       "name": "[parameters('sites_APP_xxxx_xxxx_xxxxx_name')]",
       "apiVersion": "2016-08-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "enabled": true,
@@ -218,7 +216,7 @@
       "type": "Microsoft.Web/sites/config",
       "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('config_web_name'))]",
       "apiVersion": "2016-08-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "numberOfWorkers": 1,
@@ -337,7 +335,7 @@
       "kind": "app",
       "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('slots_prd_name'))]",
       "apiVersion": "2016-08-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "enabled": true,
@@ -381,7 +379,7 @@
       "type": "Microsoft.Web/sites/slots/config",
       "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('slots_prd_name'), '/', parameters('config_web_name_1'))]",
       "apiVersion": "2016-08-01",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "numberOfWorkers": 1,
@@ -508,7 +506,7 @@
       },
       "name": "[parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name')]",
       "apiVersion": "2017-12-01-preview",
-      "location": "[parameters('RGLocation')]",
+      "location": "[parameters('myrglocation')]",
       "scale": null,
       "properties": {
         "storageProfile": {
