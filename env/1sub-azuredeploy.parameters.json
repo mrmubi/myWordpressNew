@@ -34,9 +34,6 @@
     },
     "config_web_name_1": {
       "value": "web"
-    },
-    "databases_mysql_name": {
-      "value": "mysqldb99"
     }
   }
 }
