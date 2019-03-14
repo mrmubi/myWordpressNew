@@ -11,6 +11,9 @@
     "administratorLoginPassword": {
       "value": "Microsoft1999"
     },
+    "myrglocation": {
+      "value": "West Europe"
+    },
     "sites_APP_xxxx_xxxx_xxxxx_name": {
       "value": "myWebsiteName99"
     },
@@ -34,9 +37,6 @@
     },
     "databases_mysql_name": {
       "value": "mysqldb99"
-    },
-    "RGLocation": {
-      "value": "West Europe"
     }
   }
 }
