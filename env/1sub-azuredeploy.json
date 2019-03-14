@@ -126,7 +126,6 @@
       "name": "[parameters('components_AI_xxxx_xxxx_xxxx_name')]",
       "apiVersion": "2015-05-01",
       "location": "[parameters('RGLocation')]",
-      "tags": {},
       "scale": null,
       "properties": {
         "Application_Type": "web",
@@ -142,10 +141,7 @@
       "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
       "apiVersion": "2014-04-01",
       "location": "[parameters('RGLocation')]",
-      "tags": {
-        "hidden-link:/subscriptions/20f00f50-ebde-4d6c-803f-ec3680c38ef6/resourceGroups/RG_xxxx_xxxx_xxxx/providers/microsoft.insights/components/AI-xxxx-xxxx-xxxx": "Resource"
-      },
-      "scale": null,
+     "scale": null,
       "properties": {
         "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
         "description": "",
