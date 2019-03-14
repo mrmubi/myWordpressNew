@@ -127,38 +127,7 @@
       },
       "dependsOn": []
     },
-    {
-      "type": "microsoft.insights/alertrules",
-      "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
-      "apiVersion": "2014-04-01",
-      "location": "[parameters('myrglocation')]",
-      "scale": null,
-      "properties": {
-        "name": "[parameters('alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name')]",
-        "description": "",
-        "isEnabled": true,
-        "condition": {
-          "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
-          "dataSource": {
-            "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
-            "resourceUri": "[resourceId('microsoft.insights/components', parameters('components_AI_xxxx_xxxx_xxxx_name'))]",
-            "metricNamespace": null,
-            "metricName": null
-          },
-          "operator": "GreaterThan",
-          "threshold": 2,
-          "windowSize": "PT1H"
-        },
-        "action": {
-          "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
-          "sendToServiceOwners": true,
-          "customEmails": []
-        }
-      },
-      "dependsOn": [
-        "[resourceId('microsoft.insights/components', parameters('components_AI_xxxx_xxxx_xxxx_name'))]"
-      ]
-    },
+   
 
     {
       "type": "Microsoft.Web/sites",
