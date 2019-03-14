@@ -23,11 +23,11 @@
     },
 
     "databases_mysql_name": {
-      "type": "securestring",
+      "type": "String",
       "defaultValue": "mysqldbprod"
     },
 
-    "databases_mysql_name": null,
+    
 
     "sites_APP_xxxx_xxxx_xxxxx_name": {
       "defaultValue": "APP-xxxx-xxxx-xxxxx",
