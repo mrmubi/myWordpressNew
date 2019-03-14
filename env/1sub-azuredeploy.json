@@ -49,44 +49,24 @@
       "defaultValue": "web",
       "type": "String"
     },
-    "certificateOrders_kerryfreshcom_name": {
-      "defaultValue": "kerryfreshcom",
-      "type": "String"
-    },
+  
     "alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name": {
       "defaultValue": "Failure Anomalies - AI-xxxx-xxxx-xxxx",
       "type": "String"
     },
-    "databases_sys_name": {
-      "defaultValue": "sys",
-      "type": "String"
-    },
-    "databases_mysql_name": {
-      "defaultValue": "mysql",
-      "type": "String"
-    },
+    
+    
     "firewallRules_AllowAll_name": {
       "defaultValue": "AllowAll",
       "type": "String"
     },
-    "configurations_sql_mode_name": {
-      "defaultValue": "sql_mode",
-      "type": "String"
-    },
-    "configurations_server_id_name": {
-      "defaultValue": "server_id",
-      "type": "String"
-    },
-
+  
+   
     "configurations_character_set_server_name": {
       "defaultValue": "character_set_server",
       "type": "String"
-    },
-
-    "configurations_innodb_compression_failure_threshold_pct_name": {
-      "defaultValue": "innodb_compression_failure_threshold_pct",
-      "type": "String"
     }
+ 
   },
      
   "resources": [
