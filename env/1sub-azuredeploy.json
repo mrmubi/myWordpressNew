@@ -234,19 +234,6 @@
                 "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]"
             ]
         },
-        {
-            "type": "Microsoft.DBforMySQL/servers/configurations",
-            "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('configurations_character_set_server_name'))]",
-            "apiVersion": "2017-12-01-preview",
-            "scale": null,
-            "properties": {
-                "value": "latin1",
-                "source": "system-default"
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
-            ]
-        },
       
 
       {
@@ -265,19 +252,6 @@
 
 
 
-        {
-            "type": "Microsoft.DBforMySQL/servers/firewallRules",
-            "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('firewallRules_AllowAll_name'))]",
-            "apiVersion": "2017-12-01-preview",
-            "scale": null,
-            "properties": {
-                "startIpAddress": "0.0.0.0",
-                "endIpAddress": "255.255.255.255"
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
-            ]
-        },
         {
             "type": "Microsoft.Web/sites/config",
             "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('config_web_name'))]",
