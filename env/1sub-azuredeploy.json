@@ -17,17 +17,19 @@
       "defaultValue": "Microsoft1999"
     },
 
-    "administratorLogin": {
-      "type": "string",
-      "defaultValue": "mrmubi99"
-    },
-
     "databases_mysql_name": {
       "type": "String",
       "defaultValue": "mysqldbprod"
     },
 
-    
+
+    "databases_mysql_name_dev": {
+      "type": "String",
+      "defaultValue": "mysqldbDev"
+    },
+
+
+
 
     "sites_APP_xxxx_xxxx_xxxxx_name": {
       "defaultValue": "APP-xxxx-xxxx-xxxxx",
@@ -158,7 +160,41 @@
         ],
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]",
         "reserved": false,
-        "siteConfig": null,
+        "siteConfig": {
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "ConnectionString": "[concat('Database=', parameters('databases_mysql_name_dev'), ';Data Source=', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,';Password=',parameters('administratorLoginPassword'))]",
+              "type": "MySQL"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+
+
+            {
+              "name": "DATABASE_HOST",
+              "value": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com')]"
+            },
+            {
+              "name": "DATABASE_NAME",
+              "value": "[parameters('databases_mysql_name_dev')]"
+            },
+            {
+              "name": "DATABASE_PASSWORD",
+              "value": "[parameters('administratorLoginPassword')]"
+            },
+            {
+              "name": "DATABASE_USERNAME",
+              "value": "[concat(parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+            }
+          ],
+          "appCommandLine": ""
+
+        },
         "scmSiteAlsoStopped": false,
         "hostingEnvironmentProfile": null,
         "clientAffinityEnabled": true,
@@ -321,7 +357,41 @@
         ],
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]",
         "reserved": false,
-        "siteConfig": null,
+        "siteConfig": {
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "ConnectionString": "[concat('Database=', parameters('databases_mysql_name'), ';Data Source=', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,';Password=',parameters('administratorLoginPassword'))]",
+              "type": "MySQL"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+
+
+            {
+              "name": "DATABASE_HOST",
+              "value": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com')]"
+            },
+            {
+              "name": "DATABASE_NAME",
+              "value": "[parameters('databases_mysql_name')]"
+            },
+            {
+              "name": "DATABASE_PASSWORD",
+              "value": "[parameters('administratorLoginPassword')]"
+            },
+            {
+              "name": "DATABASE_USERNAME",
+              "value": "[concat(parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+            }
+          ],
+          "appCommandLine": ""
+          
+        },
         "scmSiteAlsoStopped": false,
         "hostingEnvironmentProfile": null,
         "clientAffinityEnabled": true,
