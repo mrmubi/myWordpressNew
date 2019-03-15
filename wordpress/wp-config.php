@@ -42,16 +42,16 @@ if (empty($dbhost)){
 }
 
 
-define('DB_NAME', $dbname);
+define('DATABASE_NAME', $dbname);
 
 /** MySQL database username */
-define('DB_USER', $dbuser);
+define('DATABASE_USERNAME', $dbuser);
 
 /** MySQL database password */
-define('DB_PASSWORD', $dbpassword);
+define('DATABASE_PASSWORD', $dbpassword);
 
 /** MySQL hostname */
-define('DB_HOST', $dbhost);
+define('DATABASE_HOST', $dbhost);
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
