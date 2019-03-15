@@ -38,8 +38,12 @@
 
     "databases_mysql_name": {
       "value": "mysqldbprod"
+    },
+
+    "databases_mysql_name_dev": {
+      "value": "mysqldbdev"
     }
 
-    
+
   }
 }
