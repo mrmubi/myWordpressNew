@@ -21,24 +21,24 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress dsadas*/
-$dbname = getenv('DB_ENV_NAME');
+$dbname = getenv('DATABASE_NAME');
 if (empty($dbname)){
-	$dbname = 'wordpress5000';
+	$dbname = '';
 }
 
-$dbuser = getenv('DB_ENV_USER');
+$dbuser = getenv('DATABASE_USERNAME');
 if (empty($dbuser)){
-	$dbuser = 'yaprigal@yaprigalmysql';
+	$dbuser = '';
 }
 
-$dbpassword = getenv('DB_ENV_PASSWORD');
+$dbpassword = getenv('DATABASE_PASSWORD');
 if (empty($dbpassword)){
-	$dbpassword = 'Microsoft0512$';
+	$dbpassword = '';
 }
 
-$dbhost = getenv('DB_ENV_HOST');
+$dbhost = getenv('DATABASE_HOST');
 if (empty($dbhost)){
-	$dbhost = 'yaprigalmysql.mysql.database.azure.com:3306';
+	$dbhost = '';
 }
 
 
