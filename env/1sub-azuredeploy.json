@@ -129,7 +129,7 @@
       },
       "dependsOn": []
     },
-   
+
 
     {
       "type": "Microsoft.Web/sites",
@@ -390,7 +390,7 @@
             }
           ],
           "appCommandLine": ""
-          
+
         },
         "scmSiteAlsoStopped": false,
         "hostingEnvironmentProfile": null,
@@ -569,7 +569,7 @@
       ]
     },
 
-    
+
     {
       "type": "Microsoft.DBforMySQL/servers/databases",
       "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('databases_mysql_name'))]",
@@ -584,7 +584,19 @@
       ]
     },
 
-
+    {
+      "type": "Microsoft.DBforMySQL/servers/databases",
+      "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('databases_mysql_name_dev'))]",
+      "apiVersion": "2017-12-01-preview",
+      "scale": null,
+      "properties": {
+        "charset": "latin1",
+        "collation": "latin1_swedish_ci"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+      ]
+    },
 
     {
       "type": "Microsoft.DBforMySQL/servers/firewallRules",
