@@ -18,24 +18,46 @@
  * @package WordPress
  */
 
+
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'azmrmubimysqldbdev1' );
+/** The name of the database for WordPress dsadas*/
+$dbname = getenv('DB_ENV_NAME');
+if (empty($dbname)){
+	$dbname = 'wordpress5000';
+}
+
+$dbuser = getenv('DB_ENV_USER');
+if (empty($dbuser)){
+	$dbuser = 'yaprigal@yaprigalmysql';
+}
+
+$dbpassword = getenv('DB_ENV_PASSWORD');
+if (empty($dbpassword)){
+	$dbpassword = 'Microsoft0512$';
+}
+
+$dbhost = getenv('DB_ENV_HOST');
+if (empty($dbhost)){
+	$dbhost = 'yaprigalmysql.mysql.database.azure.com:3306';
+}
+
+
+define('DB_NAME', $dbname);
 
 /** MySQL database username */
-define( 'DB_USER', 'mrmubidev1@azmrmubimysqlhostdev1' );
+define('DB_USER', $dbuser);
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'Microsoft1981' );
+define('DB_PASSWORD', $dbpassword);
 
 /** MySQL hostname */
-define( 'DB_HOST', 'azmrmubimysqlhostdev1.mysql.database.azure.com' );
+define('DB_HOST', $dbhost);
 
 /** Database Charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+define('DB_COLLATE', '');
 
 /**#@+
  * Authentication Unique Keys and Salts.
