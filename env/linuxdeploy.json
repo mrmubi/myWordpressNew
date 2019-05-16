@@ -1,0 +1,616 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+
+    "servers_dbsrv_mysqldbserver_xxxxxxx_createMode": {
+      "defaultValue": "PointInTimeRestore",
+      "type": "SecureString"
+    },
+
+    "administratorLogin": {
+      "type": "string",
+      "defaultValue": "mrmubi99"
+    },
+    "administratorLoginPassword": {
+      "type": "securestring",
+      "defaultValue": "Microsoft1999"
+    },
+
+    "databases_mysql_name": {
+      "type": "String",
+      "defaultValue": "mysqldbprod"
+    },
+
+
+    "databases_mysql_name_dev": {
+      "type": "String",
+      "defaultValue": "mysqldbDev"
+    },
+
+
+
+
+    "sites_APP_xxxx_xxxx_xxxxx_name": {
+      "defaultValue": "APP-xxxx-xxxx-xxxxx",
+      "type": "String"
+    },
+    "myrglocation": {
+      "defaultValue": "West Europe",
+      "type": "String"
+    },
+
+    "components_AI_xxxx_xxxx_xxxx_name": {
+      "defaultValue": "myAIappinsightKG",
+      "type": "String"
+    },
+    "slots_prd_name": {
+      "defaultValue": "prd",
+      "type": "String"
+    },
+    "serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name": {
+      "defaultValue": "myAppplanKg",
+      "type": "String"
+    },
+    "config_web_name": {
+      "defaultValue": "web",
+      "type": "String"
+    },
+    "servers_dbsrv_mysqldbserver_xxxxxxx_name": {
+      "defaultValue": "dbsrv-mysqldbserver-xxxxxxx",
+      "type": "String"
+    },
+    "config_web_name_1": {
+      "defaultValue": "web",
+      "type": "String"
+    },
+
+    "alertrules_Failure_Anomalies___AI_xxxx_xxxx_xxxx_name": {
+      "defaultValue": "Failure Anomalies - AI-rule",
+      "type": "String"
+    },
+
+
+    "firewallRules_AllowAll_name": {
+      "defaultValue": "AllowAll",
+      "type": "String"
+    },
+
+
+    "configurations_character_set_server_name": {
+      "defaultValue": "character_set_server",
+      "type": "String"
+    }
+
+  },
+
+  "resources": [
+
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      },
+      "kind": "linux",
+      "name": "[parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name')]",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "name": "[parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name')]",
+        "workerTierName": null,
+        "adminSiteName": null,
+        "hostingEnvironmentProfile": null,
+        "perSiteScaling": false,
+        "reserved": true,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      },
+      "dependsOn": []
+    },
+
+    {
+      "type": "microsoft.insights/components",
+      "kind": "web",
+      "name": "[parameters('components_AI_xxxx_xxxx_xxxx_name')]",
+      "apiVersion": "2015-05-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "Application_Type": "web",
+        "Flow_Type": null,
+        "Request_Source": "IbizaWebAppExtensionCreate",
+        "HockeyAppId": null,
+        "SamplingPercentage": null
+      },
+      "dependsOn": []
+    },
+
+
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('sites_APP_xxxx_xxxx_xxxxx_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'),'app-xxxx-xxxx-xxxxx.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'),'app-xxxx-xxxx-xxxxx.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]",
+        "reserved": true,
+        "siteConfig": {
+          "linuxFxVersion": "php|7.0",
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "ConnectionString": "[concat('Database=', parameters('databases_mysql_name_dev'), ';Data Source=', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,';Password=',parameters('administratorLoginPassword'))]",
+              "type": "MySQL"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+
+
+            {
+              "name": "DATABASE_HOST",
+              "value": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com')]"
+            },
+            {
+              "name": "DATABASE_NAME",
+              "value": "[parameters('databases_mysql_name_dev')]"
+            },
+            {
+              "name": "DATABASE_PASSWORD",
+              "value": "[parameters('administratorLoginPassword')]"
+            },
+            {
+              "name": "DATABASE_USERNAME",
+              "value": "[concat(parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+            }
+          ],
+          "appCommandLine": ""
+
+        },
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null,
+        "httpsOnly": false
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]"
+      ]
+    },
+
+    {
+      "type": "Microsoft.Web/sites/config",
+      "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('config_web_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "phpVersion": "5.6",
+        "pythonVersion": "",
+        "nodeVersion": "",
+        "linuxFxVersion": "php|7.0",
+        "windowsFxVersion": null,
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": null,
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$APP-xxxx-xxxx-xxxxx",
+        "publishingPassword": null,
+        "appSettings": null,
+        "azureStorageAccounts": {},
+        "metadata": null,
+        "connectionStrings": null,
+        "machineKey": null,
+        "handlerMappings": null,
+        "documentRoot": null,
+        "scmType": "None",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": false,
+        "alwaysOn": false,
+        "javaVersion": null,
+        "javaContainer": null,
+        "javaContainerVersion": null,
+        "appCommandLine": "",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false,
+            "virtualDirectories": null
+          }
+        ],
+        "winAuthAdminState": 0,
+        "winAuthTenantState": 0,
+        "customAppPoolIdentityAdminState": false,
+        "customAppPoolIdentityTenantState": false,
+        "runtimeADUser": null,
+        "runtimeADUserPassword": null,
+        "loadBalancing": "LeastRequests",
+        "routingRules": [],
+        "experiments": {
+          "rampUpRules": []
+        },
+        "limits": null,
+        "autoHealEnabled": false,
+        "autoHealRules": null,
+        "tracingOptions": null,
+        "vnetName": "",
+        "siteAuthEnabled": false,
+        "siteAuthSettings": {
+          "enabled": null,
+          "unauthenticatedClientAction": null,
+          "tokenStoreEnabled": null,
+          "allowedExternalRedirectUrls": null,
+          "defaultProvider": null,
+          "clientId": null,
+          "clientSecret": null,
+          "clientSecretCertificateThumbprint": null,
+          "issuer": null,
+          "allowedAudiences": null,
+          "additionalLoginParams": null,
+          "isAadAutoProvisioned": false,
+          "googleClientId": null,
+          "googleClientSecret": null,
+          "googleOAuthScopes": null,
+          "facebookAppId": null,
+          "facebookAppSecret": null,
+          "facebookOAuthScopes": null,
+          "twitterConsumerKey": null,
+          "twitterConsumerSecret": null,
+          "microsoftAccountClientId": null,
+          "microsoftAccountClientSecret": null,
+          "microsoftAccountOAuthScopes": null
+        },
+        "cors": null,
+        "push": null,
+        "apiDefinition": null,
+        "autoSwapSlotName": null,
+        "localMySqlEnabled": false,
+        "managedServiceIdentityId": null,
+        "xManagedServiceIdentityId": null,
+        "ipSecurityRestrictions": null,
+        "scmIpSecurityRestrictions": null,
+        "scmIpSecurityRestrictionsUseMain": null,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "AllAllowed",
+        "reservedInstanceCount": 0
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_APP_xxxx_xxxx_xxxxx_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/slots",
+      "kind": "app",
+      "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('slots_prd_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat('app-xxxx-xxxx-xxxxx-', parameters('slots_prd_name'),'.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat('app-xxxx-xxxx-xxxxx-', parameters('slots_prd_name'),'.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]",
+        "reserved": true,
+        "siteConfig": {
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "ConnectionString": "[concat('Database=', parameters('databases_mysql_name'), ';Data Source=', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com;User Id=',parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,';Password=',parameters('administratorLoginPassword'))]",
+              "type": "MySQL"
+            }
+          ],
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "true"
+            },
+
+
+            {
+              "name": "DATABASE_HOST",
+              "value": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name') ,'.mysql.database.azure.com')]"
+            },
+            {
+              "name": "DATABASE_NAME",
+              "value": "[parameters('databases_mysql_name')]"
+            },
+            {
+              "name": "DATABASE_PASSWORD",
+              "value": "[parameters('administratorLoginPassword')]"
+            },
+            {
+              "name": "DATABASE_USERNAME",
+              "value": "[concat(parameters('administratorLogin'),'@',parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+            }
+          ],
+          "appCommandLine": ""
+
+        },
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null,
+        "httpsOnly": false
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_APP_xxxx_xxxx_xxxxx_name'))]",
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/config",
+      "name": "[concat(parameters('sites_APP_xxxx_xxxx_xxxxx_name'), '/', parameters('slots_prd_name'), '/', parameters('config_web_name_1'))]",
+      "apiVersion": "2016-08-01",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "phpVersion": "5.6",
+        "pythonVersion": "",
+        "nodeVersion": "",
+        "linuxFxVersion": "php|7.0",
+        "windowsFxVersion": null,
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2017",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$app-xxxx-xxxx-xxxxx__prd",
+        "publishingPassword": null,
+        "appSettings": null,
+        "azureStorageAccounts": {},
+        "metadata": null,
+        "connectionStrings": null,
+        "machineKey": null,
+        "handlerMappings": null,
+        "documentRoot": null,
+        "scmType": "None",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": false,
+        "alwaysOn": false,
+        "javaVersion": null,
+        "javaContainer": null,
+        "javaContainerVersion": null,
+        "appCommandLine": "",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false,
+            "virtualDirectories": null
+          }
+        ],
+        "winAuthAdminState": 0,
+        "winAuthTenantState": 0,
+        "customAppPoolIdentityAdminState": false,
+        "customAppPoolIdentityTenantState": false,
+        "runtimeADUser": null,
+        "runtimeADUserPassword": null,
+        "loadBalancing": "LeastRequests",
+        "routingRules": [],
+        "experiments": {
+          "rampUpRules": []
+        },
+        "limits": null,
+        "autoHealEnabled": false,
+        "autoHealRules": null,
+        "tracingOptions": null,
+        "vnetName": "",
+        "siteAuthEnabled": false,
+        "siteAuthSettings": {
+          "enabled": null,
+          "unauthenticatedClientAction": null,
+          "tokenStoreEnabled": null,
+          "allowedExternalRedirectUrls": null,
+          "defaultProvider": null,
+          "clientId": null,
+          "clientSecret": null,
+          "clientSecretCertificateThumbprint": null,
+          "issuer": null,
+          "allowedAudiences": null,
+          "additionalLoginParams": null,
+          "isAadAutoProvisioned": false,
+          "googleClientId": null,
+          "googleClientSecret": null,
+          "googleOAuthScopes": null,
+          "facebookAppId": null,
+          "facebookAppSecret": null,
+          "facebookOAuthScopes": null,
+          "twitterConsumerKey": null,
+          "twitterConsumerSecret": null,
+          "microsoftAccountClientId": null,
+          "microsoftAccountClientSecret": null,
+          "microsoftAccountOAuthScopes": null
+        },
+        "cors": null,
+        "push": null,
+        "apiDefinition": null,
+        "autoSwapSlotName": null,
+        "localMySqlEnabled": false,
+        "managedServiceIdentityId": null,
+        "xManagedServiceIdentityId": null,
+        "ipSecurityRestrictions": null,
+        "scmIpSecurityRestrictions": null,
+        "scmIpSecurityRestrictionsUseMain": null,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "AllAllowed",
+        "reservedInstanceCount": 0
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_APP_xxxx_xxxx_xxxxx_name'))]",
+        "[resourceId('Microsoft.Web/sites/slots', parameters('sites_APP_xxxx_xxxx_xxxxx_name'), parameters('slots_prd_name'))]"
+      ]
+    },
+
+
+    {
+      "type": "Microsoft.DBforMySQL/servers",
+      "sku": {
+        "name": "B_Gen5_2",
+        "tier": "Basic",
+        "family": "Gen5",
+        "capacity": 2
+      },
+      "name": "[parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name')]",
+      "apiVersion": "2017-12-01-preview",
+      "location": "[parameters('myrglocation')]",
+      "scale": null,
+      "properties": {
+        "storageProfile": {
+          "storageMB": 51200,
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "version": "5.7",
+        "sslEnforcement": "Disabled",
+        "administratorLogin": "[parameters('administratorLogin')]",
+        "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
+
+      },
+      "dependsOn": []
+    },
+
+    {
+      "type": "Microsoft.DBforMySQL/servers/configurations",
+      "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('configurations_character_set_server_name'))]",
+      "apiVersion": "2017-12-01-preview",
+      "scale": null,
+      "properties": {
+        "value": "latin1",
+        "source": "system-default"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+      ]
+    },
+
+
+    {
+      "type": "Microsoft.DBforMySQL/servers/databases",
+      "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('databases_mysql_name'))]",
+      "apiVersion": "2017-12-01-preview",
+      "scale": null,
+      "properties": {
+        "charset": "latin1",
+        "collation": "latin1_swedish_ci"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+      ]
+    },
+
+    {
+      "type": "Microsoft.DBforMySQL/servers/databases",
+      "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('databases_mysql_name_dev'))]",
+      "apiVersion": "2017-12-01-preview",
+      "scale": null,
+      "properties": {
+        "charset": "latin1",
+        "collation": "latin1_swedish_ci"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+      ]
+    },
+
+    {
+      "type": "Microsoft.DBforMySQL/servers/firewallRules",
+      "name": "[concat(parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'), '/', parameters('firewallRules_AllowAll_name'))]",
+      "apiVersion": "2017-12-01-preview",
+      "scale": null,
+      "properties": {
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "255.255.255.255"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.DBforMySQL/servers', parameters('servers_dbsrv_mysqldbserver_xxxxxxx_name'))]"
+      ]
+    }
+  ]
+}
