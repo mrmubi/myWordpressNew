@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "servers_dbsrv_mysqldbserver_xxxxxxx_createMode": {
+      "value": "PointInTimeRestore"
+    },
+    "administratorLogin": {
+      "value": "admin"
+    },
+    "administratorLoginPassword": {
+      "value": "Microsoft1999"
+    },
+    "myrglocation": {
+      "value": "West Europe"
+    },
+    "sites_APP_xxxx_xxxx_xxxxx_name": {
+      "value": "myWebsiteName99"
+    },
+    "components_AI_xxxx_xxxx_xxxx_name": {
+      "value": "myAIComponents99"
+    },
+    "slots_prd_name": {
+      "value": "Prd"
+    },
+    "serverfarms_APP_PLAN_xxxx_xxxx_xxxxx_name": {
+      "value": "mywebsiteserviceplan99"
+    },
+    "config_web_name": {
+      "value": "web"
+    },
+    "servers_dbsrv_mysqldbserver_xxxxxxx_name": {
+      "value": "mysqlservernamemrmubi99"
+    },
+    "config_web_name_1": {
+      "value": "web"
+    },
+
+    "databases_mysql_name": {
+      "value": "mysqldbprod"
+    },
+
+    "databases_mysql_name_dev": {
+      "value": "mysqldbdev"
+    }
+
+
+  }
+}
